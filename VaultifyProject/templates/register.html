@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAULTIFY Personal Digital Vault - Register</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="card">
+        <div class="logo-container">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 7h2v2h-2V8zm0 4h2v6h-2v-6z"/>
+            </svg>
+            <div class="logo-text">
+                <span class="logo-title">VAULTIFY</span>
+                <span class="logo-subtitle">Personal Digital Vault</span>
+            </div>
+        </div>
+
+        <h2>Register</h2>
+        <p class="instruction-text">Create your account to get started.</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Type your username" required>
+    </div>
+
+    <div class="input-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+            <i class="far fa-eye toggle-password"></i>
+        </div>
+    </div>
+
+    <button type="submit" class="btn-primary">Register</button>
+</form>
+
+        <p class="footer-text">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+</body>
+</html>
