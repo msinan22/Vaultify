@@ -57,15 +57,18 @@ def dashboard_view(request):
     return render(request, 'dashboard.html', context)
 
 #logout
+@login_required(login_url='login')
 def logout_view(request):
     logout(request)
     return redirect('login')
 
 #profile_view
+@login_required(login_url='login')
 def profile_view(request):
     return render(request,'profile.html')
 
 #Note
+@login_required(login_url='login')
 def notes_view(request):
     if request.method == 'POST':
         title_data = request.POST.get('title')
@@ -84,13 +87,14 @@ def notes_view(request):
     
     return render(request, 'note.html', {'notes': user_notes})
 
+@login_required(login_url='login')
 def delete_note_view(request, note_id):
     note = get_object_or_404(Note, id=note_id, user=request.user)
     note.delete()
     return redirect('note')
 
 #imagefield
-@login_required
+@login_required(login_url='login')
 def image_gallery(request):
     if request.method == 'POST':
         image_file = request.FILES.get('image_file')
@@ -110,7 +114,7 @@ def image_gallery(request):
     images = Images.objects.filter(user=request.user).order_by('-uploaded_at')
     return render(request, 'images.html', {'images': images})
 
-@login_required
+@login_required(login_url='login')
 def delete_image(request, image_id):
     if request.method == 'POST':
         # Ensures a user can only delete their own images
@@ -142,6 +146,7 @@ def documents_view(request):
     
     return render(request, 'documents.html', {'documents': user_docs})
 
+@login_required(login_url='login')
 def delete_document_view(request, doc_id):
     doc = get_object_or_404(Documents, id=doc_id, user=request.user)
     
