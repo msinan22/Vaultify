@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAULTIFY Personal Digital Vault - My Documents</title>
+    <link rel="stylesheet" href="{% static 'css/media.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- Hamburger Toggle (visible on mobile/tablet) -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle sidebar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 7h2v2h-2V8zm0 4h2v6h-2v-6z"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-title">VAULTIFY</span>
+                    <span class="logo-subtitle">Personal Digital Vault</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="{% url 'dashboard' %}" class="nav-item">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="{% url 'profile' %}" class="nav-item">
+                    <i class="fa-solid fa-user"></i> Profile
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="{% url 'login' %}" class="nav-item logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <a href="{% url 'dashboard' %}" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <h1>My Secure Documents</h1>
+                <p class="subtitle">Upload, track, and securely store your  files.</p>
+            </header>
+
+            <section class="creation-card">
+                <h3><i class="fa-solid fa-file-arrow-up"></i> Upload a New Document</h3>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <label for="id_title">Document Title (Optional)</label>
+                        <input type="text" id="id_title" name="title" placeholder="e.g., Lease Agreement">
+                    </div>
+                    
+                    <div class="upload-dropzone">
+                        <i class="fa-solid fa-file-pdf dropzone-icon"></i>
+                        <label for="id_doc" class="file-label">
+                            <span>Click to browse</span> or drag and drop your file here
+                        </label>
+                        <br>
+                        <input type="file" id="id_doc" name="document_file" required>
+                        <p class="file-spec-hint">Supports: PDF, DOCX, XLSX, TXT</p>
+                    </div>
+                    
+                    <br>
+                    <button type="submit" class="btn btn-purple">Upload File</button>
+                </form>
+            </section>
+
+            <hr class="section-divider">
+
+            <section class="docs-section">
+                <h3>Your Saved Documents</h3>
+                <div class="docs-list">
+                    {% for doc in documents %}
+                        <div class="doc-row">
+                            <div class="doc-meta-block">
+                                <br>
+                                <div class="doc-row" style="display: flex; justify-content: space-between; align-items: center; border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: #fff;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="far fa-file-alt" style="font-size: 1.5rem; color: #7c5dfa;"></i>
+                                        <div>
+                                            <h4 style="margin: 0; color: #333;">{{ doc.title }}</h4>
+                                            <small style="color: #aaa;">Uploaded: {{ doc.uploaded_at|date:"M d, Y" }}</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="display: flex; gap: 15px; align-items: center;">
+                                        <a href="{{ doc.file.url }}" download style="text-decoration: none; color: #7c5dfa; font-weight: bold;">
+                                            <i class="fas fa-download"></i> Download
+                                        </a>
+                                        
+                                        <a href="{% url 'delete_document' doc.id %}" onclick="return confirm('Permanently delete this file?')" style="text-decoration: none; color: #ff4a4a; font-weight: bold;">
+                                            <i class="fas fa-trash-alt"></i> Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="empty-state">
+                            <i class="fa-solid fa-folder-closed"></i>
+                            <p>No documents uploaded yet. Keep your important files secure by uploading one above!</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        const hamburger = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+    </script>
+</body>
+</html>

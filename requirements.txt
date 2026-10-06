@@ -1,0 +1,15 @@
+# Vaultify Django Project Dependencies
+
+# Core Web Framework
+Django==6.1.1
+
+# Image Processing (Required by VaultifyApp for models.ImageField support)
+Pillow==12.3.0
+
+# Environment Management (Required for loading secrets from .env in settings.py)
+python-dotenv>=1.0,<2
+
+# Core Django Sub-dependencies & Utilities
+asgiref==3.12.1
+sqlparse==0.6.0
+tzdata==2026.4

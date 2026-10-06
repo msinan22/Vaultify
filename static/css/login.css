@@ -1,0 +1,220 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Card Container */
+.card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+/* Header & Logo styling */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    color: #0d6efd;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.1;
+}
+
+.logo-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.logo-subtitle {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.instruction-text {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 28px;
+}
+
+/* Form layouts */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #334155;
+    background-color: #fdfdfd;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #0d6efd;
+    background-color: #ffffff;
+}
+
+.input-group input::placeholder {
+    color: #94a3b8;
+}
+
+/* Password eye-toggle integration */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 40px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Buttons */
+.btn-primary {
+    width: 100%;
+    background-color: #0d6efd;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+/* Footer Link Settings */
+.footer-text {
+    font-size: 13px;
+    color: #1e293b;
+    margin-top: 24px;
+}
+
+.footer-text a {
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* Container for all messages/alerts */
+.messages-container {
+    width: 100%;
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+/* Base style for any alert message */
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+}
+
+/* Specific green style for Success messages */
+.alert.success {
+    background-color: #f0fdf4; /* Light green background */
+    color: #198754;            /* Dark green text */
+    border-color: #dcfce7;      /* Subtle green border */
+}
+
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT — Small Screen Adjustments
+   ========================================================================== */
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 28px 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .logo-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .logo-title {
+        font-size: 16px;
+    }
+
+    .logo-subtitle {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAULTIFY Personal Digital Vault - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- Hamburger Toggle (visible on mobile/tablet) -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle sidebar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 7h2v2h-2V8zm0 4h2v6h-2v-6z"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-title">VAULTIFY </span>
+                    <span class="logo-subtitle">Personal Digital Vault</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="{% url 'dashboard' %}" class="nav-item active">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="{% url 'profile' %}" class="nav-item">
+                    <i class="fa-solid fa-user"></i> Profile
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="{% url 'logout' %}" class="nav-item logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Welcome back, {{ username }}!</h1>
+                <p class="subtitle">Securely store and manage your personal notes, images and documents.</p>
+            </header>
+
+            <section class="cards-grid">
+                <div class="feature-card card-blue">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h3>Notes</h3>
+                    <p>Create, edit and manage your personal notes.</p>
+                    <a href="{% url 'note' %}"
+                    <button class="btn btn-blue">Go to Notes</button>
+                    </a>
+                </div>
+
+                <div class="feature-card card-green">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <h3>Images</h3>
+                    <p>Upload and manage your images.</p>
+                    <a href="{% url 'image_gallery' %}"
+                    <button class="btn btn-green">Go to Images</button>
+                    </a>
+                </div>
+
+                <div class="feature-card card-purple">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </div>
+                    <h3>Documents</h3>
+                    <p>Upload and manage your documents.</p>
+                    <a href="{% url 'documents' %}"
+                    <button class="btn btn-purple">Go to Documents</button>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        const hamburger = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+    </script>
+</body>
+</html>

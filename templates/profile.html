@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAULTIFY Personal Digital Vault - Profile</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        
+        <!-- Hamburger Toggle (visible on mobile/tablet) -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle sidebar">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Left Sidebar (Consistent with Dashboard) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 7h2v2h-2V8zm0 4h2v6h-2v-6z"/>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-title">VAULTIFY </span>
+                    <span class="logo-subtitle">Personal Digital Vault</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="{% url 'dashboard' %}" class="nav-item">
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="{% url 'profile' %}" class="nav-item active">
+                    <i class="fa-solid fa-user"></i> Profile
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="{% url 'logout' %}" class="nav-item logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>My Profile</h1>
+                <p class="subtitle">View and update your personal vault account details.</p>
+            </header>
+
+            <!-- Profile Form Card -->
+            <div class="profile-card">
+                <form>
+                    
+                    <!-- Profile Picture Section -->
+                    <div class="profile-pic-section">
+                        <div class="avatar-wrapper">
+                            <!-- Fallback default icon if no image chosen -->
+                            <i class="fa-solid fa-user default-avatar"></i>
+                            <img id="avatar-preview" src="#" alt="Profile Preview" style="display: none;">
+                            <label for="profile-pic-upload" class="upload-badge" title="Upload Image">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                        </div>
+                        <input type="file" id="profile-pic-upload" accept="image/*" hidden>
+                        <p class="upload-hint">Click the camera icon to upload a profile picture</p>
+                    </div>
+
+                    <!-- Input Fields Grid -->
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" value="" placeholder="Your username" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" value="" placeholder="Your full name" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Email ID</label>
+                            <input type="email" id="email" value="" placeholder="Your email address" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="mobile">Mobile Number</label>
+                            <input type="tel" id="mobile" value="" placeholder="Your mobile number" required>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-save">Save Changes</button>
+                        <button type="button" class="btn btn-cancel">Cancel</button>
+                    </div>
+
+                </form>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Optional light script for image preview functionality -->
+    <script>
+        const fileInput = document.getElementById('profile-pic-upload');
+        const previewImg = document.getElementById('avatar-preview');
+        const defaultIcon = document.querySelector('.default-avatar');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                    defaultIcon.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        const hamburger = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        hamburger.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+    </script>
+</body>
+</html>
